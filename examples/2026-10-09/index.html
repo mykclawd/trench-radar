@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trench Radar: October 9, 2026</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --bg-raise: #15181e;
+    --ink: #e8eaed;
+    --muted: #9aa1ab;
+    --faint: #6b7280;
+    --accent: #d29922;
+    --up: #3fb950;
+    --down: #f85149;
+    --rule: #262a31;
+    --radius: 6px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 56px 24px 72px; }
+  .one-liner {
+    margin: 0 0 38px;
+    padding: 22px 24px;
+    background: var(--bg-raise);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+  }
+  .one-liner-label { color: var(--accent); font-weight: 650; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; display: block; margin-bottom: 8px; }
+  .one-liner-text { margin: 0; font-size: 19px; line-height: 1.52; color: var(--ink); max-width: 68ch; }
+  .mast { margin-bottom: 40px; }
+  .mast .kicker { color: var(--accent); font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  h1 { margin: 0; font-size: clamp(32px, 6vw, 44px); line-height: 1.05; letter-spacing: -0.02em; font-weight: 750; max-width: 12ch; }
+  .dateline { color: var(--muted); font-size: 15px; margin-top: 12px; }
+  section { margin-top: 56px; }
+  h2 { font-size: 22px; letter-spacing: -0.01em; margin: 0 0 6px; font-weight: 700; }
+  .rule { height: 1px; background: var(--rule); border: 0; margin: 0 0 24px; }
+  .story { margin-bottom: 30px; max-width: 68ch; }
+  .story h3 { font-size: 17.5px; margin: 0 0 6px; line-height: 1.35; letter-spacing: -0.005em; }
+  .story p { margin: 0; color: var(--muted); font-size: 15.5px; max-width: 68ch; }
+  .story p strong, .story p b { color: var(--ink); font-weight: 600; }
+  .tick { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--ink); }
+  table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  thead th {
+    text-align: left; color: var(--faint); font-weight: 600; font-size: 12.5px;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 0 14px 10px 0; border-bottom: 1px solid var(--rule);
+  }
+  tbody td { padding: 14px 14px 14px 0; vertical-align: top; color: var(--muted); }
+  tbody tr + tr td { border-top: 1px solid transparent; }
+  tbody td:first-child { color: var(--ink); white-space: nowrap; }
+  .up { color: var(--up); }
+  .down { color: var(--down); }
+  .delta { display: grid; grid-template-columns: 150px 1fr; gap: 6px 20px; padding: 14px 0; }
+  .delta + .delta { border-top: 0; }
+  .delta .who { color: var(--ink); font-weight: 600; font-size: 15px; }
+  .delta .what { color: var(--muted); font-size: 15px; max-width: 68ch; }
+  .delta .verdict { grid-column: 2; font-size: 14px; }
+  .verdict.up { color: var(--up); }
+  .verdict.down { color: var(--down); }
+  .verdict.flat { color: var(--faint); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    background: var(--bg-raise);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: 8px 12px;
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  .hero { margin: 0 0 28px; }
+  .hero img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius); }
+  .story-img { margin: 0 0 12px; }
+  .story-img img { display: block; width: 100%; height: auto; max-height: 380px; object-fit: cover; border-radius: var(--radius); }
+  .story p.src { margin-top: 8px; font-size: 12.5px; line-height: 1.5; color: var(--faint); }
+  .story p.src a { color: var(--faint); text-decoration: underline; text-underline-offset: 2px; }
+  footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--rule); color: var(--faint); font-size: 13.5px; }
+  footer p { margin: 4px 0; max-width: 68ch; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  @media (max-width: 640px) {
+    .wrap { padding: 36px 18px 56px; }
+    .delta { grid-template-columns: 1fr; gap: 2px; }
+    .delta .verdict { grid-column: 1; }
+    thead { display: none; }
+    tbody td { display: block; padding: 2px 0; border: 0; }
+    tbody tr { display: block; padding: 12px 0; }
+    tbody tr + tr { border-top: 0; }
+  }
+</style>
+
+<!-- og-meta:start -->
+<meta name="description" content="Crypto traders lost $1.19 billion in a selloff, Thailand issued Bitcoin and Ether ETF rules, and a new Robinhood Chain $PAPER pool traded $8.84 million.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Trench Radar">
+<meta property="og:title" content="Trench Radar: $1.19 billion in crypto positions closed as Ether traders take the worst hit">
+<meta property="og:description" content="Crypto traders lost $1.19 billion in a selloff, Thailand issued Bitcoin and Ether ETF rules, and a new Robinhood Chain $PAPER pool traded $8.84 million.">
+<meta property="og:url" content="https://reports.mykclawd.xyz/trenches/2026-10-09/">
+<meta property="og:image" content="https://reports.mykclawd.xyz/trenches/images/2026-10-09-120203.jpg">
+<meta property="og:image:alt" content="Crypto selloff, Thai Bitcoin and Ether ETF rules, and Robinhood Chain PAPER">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Trench Radar: $1.19 billion in crypto positions closed as Ether traders take the worst hit">
+<meta name="twitter:description" content="Crypto traders lost $1.19 billion in a selloff, Thailand issued Bitcoin and Ether ETF rules, and a new Robinhood Chain $PAPER pool traded $8.84 million.">
+<meta name="twitter:image" content="https://reports.mykclawd.xyz/trenches/images/2026-10-09-120203.jpg">
+<!-- og-meta:end -->
+</head>
+<body>
+<div class="wrap">
+<figure class="hero"><img src="../images/2026-10-09-120203.jpg" alt="Crypto selloff, Thai Bitcoin and Ether ETF rules, and Robinhood Chain PAPER"></figure>
+<section class="one-liner"><span class="one-liner-label">One-liner</span><p class="one-liner-text">Crypto traders lost $1.19 billion in a selloff, Thailand issued Bitcoin and Ether ETF rules, and a new Robinhood Chain $PAPER pool traded $8.84 million.</p></section>
+<header class="mast"><div class="kicker">Trench Radar</div><h1>$1.19 billion in crypto positions closed as Ether traders take the worst hit</h1><div class="dateline"><b>October 9, 2026</b> · 8:00 AM ET</div></header>
+
+<main><section><h2>Headline stories</h2><hr class="rule">
+<article class="story"><h3>Ether traders bear the worst of a $1.19 billion crypto selloff.</h3><p>Late Thursday's decline closed <strong>$1.19 billion</strong> in borrowed crypto positions over 24 hours, more than $1 billion of them bets on higher prices. Ether traders lost about $356 million versus $298 million for Bitcoin, despite Ether's much smaller market value. The largest single closure was a nearly $20 million Ether position on Hyperliquid. Bitcoin dipped toward $80,400 before recovering above $82,000 early Friday.</p><p class="src">Sources: <a href="https://www.coindesk.com/markets/2026/10/09/ether-bets-were-wiped-out-at-six-times-bitcoin-s-rate-in-crypto-s-usd1-billion-flush">coindesk.com</a></p></article>
+<article class="story"><h3>Thailand sets rules for domestic Bitcoin and Ether ETFs.</h3><p>Thailand's securities regulator issued rules Friday for locally listed funds holding Bitcoin or Ether, with the rules scheduled to take effect October 16. Licensed custodians and a minimum 80% average exposure to the fund's chosen asset are required. Investors cannot borrow from brokers to buy the funds. This is a regulatory opening, not confirmation that any fund has begun trading.</p><p class="src">Sources: <a href="https://www.theblock.co/news/regulation/2026-10-09-thailand-sec-issues-bitcoin-and-ether-etf-rules-set-to-take-effect-oct-16-418132">theblock.co</a>, <a href="https://www.coindesk.com/policy/2026/10/09/thailand-opens-door-to-locally-listed-bitcoin-and-ether-etfs">coindesk.com</a></p></article>
+</section>
+<section><h2>Culture and drama</h2><hr class="rule">
+<article class="story"><h3>Robinhood Chain's new $PAPER pool draws nearly $9 million in trading.</h3><p>The pool opened early Friday and recorded <strong>$8.84 million in 24-hour trading</strong>, with a tracker-estimated fully diluted value of $13.87 million. Its displayed gain of more than 500,000% starts from a tiny opening price and does not represent a typical trader's return. Separately, Thursday's $SWARM pool traded $11.19 million and showed a 6,345% gain from its opening price. Neither ticker is evidence of a Robinhood-issued asset.</p><p class="src">Sources: <a href="https://www.geckoterminal.com/robinhood/pools/0x79c499dba9e823b53286fbc5da47f3512d501918">geckoterminal.com</a>, <a href="https://www.geckoterminal.com/robinhood/pools/0xd8a01cde92d5072bf981614b2592e01640b8c962">geckoterminal.com</a></p></article>
+<article class="story"><h3>Fresh Solana meme pools jump even as Ether meme favorite CLAUS sinks.</h3><p>A $TikTok pool opened Thursday evening and traded $6.56 million while rising about 1,093% from its opening price. Friday's $QI pool gained about 2,873% with $3.03 million traded; $PQC, opened Thursday morning, gained 1,264% with $6.05 million traded. On Ethereum, the top trending $CLAUS pool fell 74.9% on $6.50 million in trading. Pool opening prices can make percentage changes look spectacular.</p><p class="src">Sources: <a href="https://www.geckoterminal.com/solana/pools/Bjhum36bzoYbheRgSpkZLZsttbPBDbJCDoeKA7o9N2o">geckoterminal.com</a>, <a href="https://www.geckoterminal.com/solana/pools/cb4GFRgEitfu5qtxfRMiqzsaVPwgbD3HEor4cs2jFpn">geckoterminal.com</a>, <a href="https://www.geckoterminal.com/eth/pools/0xc2da8a7f8233112dc5b216de23c4308063eaa631">geckoterminal.com</a></p></article>
+</section>
+<section><h2>Builders and launches</h2><hr class="rule">
+<article class="story"><h3>Meanwhile raises $37.5 million to expand Bitcoin life insurance.</h3><p>The Bermuda-based company announced the round Thursday; Bain Capital Crypto led it, alongside Haun Ventures, Framework Ventures, Pantera Capital and others. Meanwhile says it has signed 15 broker partners and is expanding Bitcoin-denominated life insurance outside the United States. Its total funding now exceeds $180 million. This is a funding announcement, not a new token launch.</p><p class="src">Sources: <a href="https://www.theblock.co/news/deals/2026-10-09-sam-altman-backed-bitcoin-life-insurer-meanwhile-raises-37-5-million-round-led-by-bain-capital-crypto-418131">theblock.co</a>, <a href="https://www.businesswire.com/news/home/20261008514088/en/Sam-Altman-Backed-Meanwhile-Raises-%2437.5M-as-Families-Across-Asia-Europe-and-the-Middle-East-Turn-to-Bitcoin-Life-Insurance">businesswire.com</a></p></article>
+</section>
+<section><h2>Coins worth noting</h2><hr class="rule"><article class="story"><p>Rolling 24-hour pool figures near 8 AM ET. FDV means fully diluted value, not circulating market cap. Different pools with the same symbol can represent separate contracts. High pool turnover does not guarantee organic demand.</p></article><table><thead><tr><th>Token</th><th>Chain</th><th>24h volume</th><th>FDV</th><th>24h</th></tr></thead><tbody><tr><td><a href="https://www.geckoterminal.com/base/pools/0x7735599c022c840da8bb5c2caa739a8d839aa299">$whuf</a></td><td>Base</td><td>$2.90M</td><td>$34.25M</td><td>-31.1%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/base/pools/0x2df380544b88adb3ad0a94100dcc45fd705aae2d">$xdp</a></td><td>Base</td><td>$165.77M</td><td>$229.97M</td><td>+19.7%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/base/pools/0x01784ef301d79e4b2df3a21ad9a536d4cf09a5ce">$VVV</a></td><td>Base</td><td>$5.16M</td><td>$1833.97M</td><td>-7.3%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/base/pools/0x6cdcb1c4a4d1c3c6d054b27ac5b77e89eafb971d">$AERO</a></td><td>Base</td><td>$9.81M</td><td>$1621.32M</td><td>+5.1%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/base/pools/0x5116773e18a9c7bb03ebb961b38678e45e238923">$DRB</a></td><td>Base</td><td>$287K</td><td>$18.77M</td><td>-1.5%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/base/pools/0xe2654cc01616e962fbfcc4277c23062e59e70e39f87221d77b6d438705a5f286">$DRV</a></td><td>Base</td><td>$6.79M</td><td>$96.39M</td><td>+29.2%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/base/pools/0xaec085e5a5ce8d96a7bdd3eb3a62445d4f6ce703">$BNKR</a></td><td>Base</td><td>$295K</td><td>$30.93M</td><td>-8.8%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/base/pools/0x717e174d5dae280802d1a2c15c1c0976561a3f61">$ZRO</a></td><td>Base</td><td>$1.91M</td><td>$13.00M</td><td>+6.1%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/base/pools/0x566bee7ef7b39f29d150ab3be6b6242c17cc5a31">$EDEL</a></td><td>Base</td><td>$758K</td><td>$37.21M</td><td>+8.4%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/solana/pools/745ATaSSWxvry5qt1XVv9eXuG884hDvNJfvA2o82dNBi">$Frank</a></td><td>Solana</td><td>$1.45M</td><td>$829K</td><td>+21.5%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/solana/pools/Bjhum36bzoYbheRgSpkZLZsttbPBDbJCDoeKA7o9N2o">$TikTok</a></td><td>Solana</td><td>$6.56M</td><td>$467K</td><td>+1,092.6%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/solana/pools/6qUUCwD9fyRafora8XVmdApQBxCkbUiZTMkcYD47rWsS">$PQC</a></td><td>Solana</td><td>$6.05M</td><td>$1.57M</td><td>+1,263.9%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/solana/pools/4R8CiMnJWDNoes3fQi1ccPFJygPXazaHaWpHrN3rZeNj">$JEANPHIL</a></td><td>Solana</td><td>$3.71M</td><td>$11.62M</td><td>+189.0%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/solana/pools/4qxSqMh6iEdbdvtMp8r5MK2psAGKNk57PfGeVo2VhczQ">$WhiteWhale</a></td><td>Solana</td><td>$1.57M</td><td>$1.64M</td><td>+144.0%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/solana/pools/6QyYdc6jgeKnfP1FWhiexMYq3JQ3sidSYoubjWUTo3rm">$HeeHaw</a></td><td>Solana</td><td>$5.24M</td><td>$2.71M</td><td>+2,230.1%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/solana/pools/Cb7ZRgPLhji3Th7htXyKEqbXvNjPpeTvckXuWakBUhXu">$baton</a></td><td>Solana</td><td>$2.06M</td><td>$13.42M</td><td>+48.6%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/solana/pools/8ewuF2o8ACro7fqWepZ3tKhkbBjndZU4Ldk9scRPw83d">$swordcat</a></td><td>Solana</td><td>$2.16M</td><td>$3.28M</td><td>+60.5%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/solana/pools/A7nWJWGUjNyWbVNPA5RrvLoF37j3ovdh8DKdgxYefcdk">$SENTS</a></td><td>Solana</td><td>$1.65M</td><td>$50K</td><td>-8.7%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/solana/pools/cb4GFRgEitfu5qtxfRMiqzsaVPwgbD3HEor4cs2jFpn">$QI</a></td><td>Solana</td><td>$3.03M</td><td>$1.16M</td><td>+2,873.2%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/eth/pools/0xc2da8a7f8233112dc5b216de23c4308063eaa631">$CLAUS</a></td><td>Ethereum</td><td>$6.50M</td><td>$8.55M</td><td>-74.9%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/eth/pools/0x807d8084fd2a0e204590514286454dacce902b65">$ASENSE</a></td><td>Ethereum</td><td>$3.41M</td><td>$838K</td><td>-74.2%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/eth/pools/0x60446cf938c80775d2cf640580da230ca80d69de93f4683a23aa1abb7e47e57b">$CLAUS (pool #3)</a></td><td>Ethereum</td><td>$2.36M</td><td>$9.65M</td><td>-44.0%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/eth/pools/0x02a13b057643e001f9436fa86e3c28945b6c4475a34e068df5c6ab4d42ff93bf">$AGL</a></td><td>Ethereum</td><td>$209K</td><td>$5.87M</td><td>-1.8%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/eth/pools/0xd57467b3114eb68dd57ee541875d157ec71ecd0fdb3fc5d3e87a91f0b7f9991a">$QNT</a></td><td>Ethereum</td><td>$1.77M</td><td>$11336.56M</td><td>+5.6%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/eth/pools/0x230ecd3c25b44af30db59c15f70df7794eb13f67a200f230b7400daa96fe804d">$FWA</a></td><td>Ethereum</td><td>$406K</td><td>$14.58M</td><td>-16.5%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/eth/pools/0xa43fe16908251ee70ef74718545e4fe6c5ccec9f">$PEPE</a></td><td>Ethereum</td><td>$1.35M</td><td>$1623.26M</td><td>-2.1%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/eth/pools/0x56a344f1aa03943f536b94436de6a6e10116cf86">$OGN</a></td><td>Ethereum</td><td>$2.72M</td><td>$52.84M</td><td>+1.9%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/eth/pools/0xb07d640fd9e2eb9dc81b953c8e4fd006bdfeaf276010fb5418eb763ca15abfb3">$VIBE</a></td><td>Ethereum</td><td>$2.54M</td><td>$28.98M</td><td>-2.8%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/eth/pools/0xf884f15815c943e08daebb0c8945d5b27cc7bfa4ed2880be1195048a9aad9f74">$ZC</a></td><td>Ethereum</td><td>$889K</td><td>$15.44M</td><td>-3.5%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/robinhood/pools/0x9a25f2461055af82b771ed88d16a2e9245dcea344a7211aa8c147d72f9d658ec">$HOODIE</a></td><td>Robinhood Chain</td><td>$955K</td><td>$218K</td><td>+108.6%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/robinhood/pools/0x7d169fd139e79f524367a1a23f2c29eced9b961fd45db61b9513539fbf206a49">$SI</a></td><td>Robinhood Chain</td><td>$34K</td><td>$117K</td><td>-6.4%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/robinhood/pools/0x88401f04a9af8326ccd642d64192442875d8378f7f5b324ac2449c481831ff9b">$CRH</a></td><td>Robinhood Chain</td><td>$986K</td><td>$2.35M</td><td>+3,672.8%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/robinhood/pools/0x85affa754030fcca24451003c55c935daa9a8be2dd5011f960ee81aa90f12151">$OVO</a></td><td>Robinhood Chain</td><td>$75K</td><td>$61K</td><td>+9.0%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/robinhood/pools/0xd42a491087a15e5afd51feb3606066cc152d2b09">$CASHCAT</a></td><td>Robinhood Chain</td><td>$2.01M</td><td>$113.13M</td><td>-4.2%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/robinhood/pools/0x590dcb6a87828bf688b48089a62239b693378f1fb64d2286e6a399ed8c005fdf">$HOOKR</a></td><td>Robinhood Chain</td><td>$1.01M</td><td>$21.04M</td><td>+3.3%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/robinhood/pools/0x486435a1f76cd58193f854c6e6213cd05fd58d637865d02065ff558b387fa6ea">$PONS</a></td><td>Robinhood Chain</td><td>$3.71M</td><td>$240.21M</td><td>-6.4%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/robinhood/pools/0xb20f215e6b55ed39bc2376bc4d7fc4eabb2943fad0e0e3456a69869e1d4ce53a">$LOL</a></td><td>Robinhood Chain</td><td>$567K</td><td>$547K</td><td>+516.0%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/robinhood/pools/0xdd086a556aa997e79d16cde88a6fcda21f615737df3d331ca1af74642e99dc09">$PULP</a></td><td>Robinhood Chain</td><td>$867K</td><td>$772K</td><td>-30.7%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/robinhood/pools/0xcbdfea90430a30ee4469c9902e120a77e7c7e4711d5643671c1d1957f2f1ce27">$AI</a></td><td>Robinhood Chain</td><td>$1.95M</td><td>$97.64M</td><td>-9.7%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/robinhood/pools/0xd8a01cde92d5072bf981614b2592e01640b8c962">$SWARM</a></td><td>Robinhood Chain</td><td>$11.19M</td><td>$17.28M</td><td>+6,344.7%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/robinhood/pools/0x79c499dba9e823b53286fbc5da47f3512d501918">$PAPER</a></td><td>Robinhood Chain</td><td>$8.84M</td><td>$13.87M</td><td>+549,357.5%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/bsc/pools/0xb2124c5c89cff74dc231a6468ebb8d30de627884">$Darkex</a></td><td>BNB Chain</td><td>$43K</td><td>$1.52M</td><td>+3.5%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/bsc/pools/0x30000a407fabebe29439f8e437050512ff6661be">$TART</a></td><td>BNB Chain</td><td>$1.02M</td><td>$8.85M</td><td>+23.9%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/bsc/pools/0x22af7297243c4eef12e2d5a4f888b92e56bf127c">$龙虾</a></td><td>BNB Chain</td><td>$6.90M</td><td>$44.44M</td><td>+17.3%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/bsc/pools/0xcaaf3c41a40103a23eeaa4bba468af3cf5b0e0d8">$ARK</a></td><td>BNB Chain</td><td>$4.93M</td><td>$206.83M</td><td>-0.6%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/bsc/pools/0xef470f9ae8512d2762e4f1cd91ae58caea17143afa61b8d56e9b20c8f87688c4">$COLLECT</a></td><td>BNB Chain</td><td>$3.83M</td><td>$64.80M</td><td>+3.5%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/bsc/pools/0x9485ff32b6b4444c21d5abe4d9a2283d127075a2">$quq</a></td><td>BNB Chain</td><td>$107.66M</td><td>$1.28M</td><td>+0.5%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/bsc/pools/0x7d90deedb9f15c1f8fdaccc3b6bc52dc208e9c9a">$CREPE</a></td><td>BNB Chain</td><td>$78K</td><td>$5.72M</td><td>-1.1%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/bsc/pools/0x933477eba23726ca95a957cb85dbb1957267ef85">$WKC</a></td><td>BNB Chain</td><td>$71K</td><td>$35.07M</td><td>-4.2%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/bsc/pools/0x25042161f871a34e77a7af1aff74aa1a0dc9b4c661fd53c7504948ad97f8d13f">$AEON</a></td><td>BNB Chain</td><td>$4.09M</td><td>$69.35M</td><td>+4.0%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/bsc/pools/0xe6edc555061d1d9fe0145867b7ea7b07da840898">$Hachiko</a></td><td>BNB Chain</td><td>$13K</td><td>$795K</td><td>+5.9%</td></tr>
+<tr><td><a href="https://www.geckoterminal.com/bsc/pools/0x8bafe0bdd3eb9ae0539f5b32e771c1a72a189b7f">$Q</a></td><td>BNB Chain</td><td>$14.15M</td><td>$139.38M</td><td>+17.0%</td></tr></tbody></table></section>
+<section><h2>Seed accounts active</h2><hr class="rule"><div class="chips"><span class="chip">0xDeployer: discussed fees paid directly to token holders</span></div></section>
+<section><h2>Deltas since last run</h2><hr class="rule"><div class="delta"><div class="who">$whuf<br>Base</div><div class="what">$2.90M in 24-hour pool trading; #2 trending on Base.</div><div class="verdict down">24-hour price -31.1%; FDV $34.25M.</div></div>
+<div class="delta"><div class="who">$xdp<br>Base</div><div class="what">$7.07M to $165.77M in 24-hour pool trading; #3 trending on Base.</div><div class="verdict up">24-hour price +19.7%; FDV $229.97M.</div></div>
+<div class="delta"><div class="who">$VVV<br>Base</div><div class="what">$1.21M to $5.16M in 24-hour pool trading; #4 trending on Base.</div><div class="verdict down">24-hour price -7.3%; FDV $1833.97M.</div></div>
+<div class="delta"><div class="who">$AERO<br>Base</div><div class="what">$4.09M to $9.81M in 24-hour pool trading; #5 trending on Base.</div><div class="verdict up">24-hour price +5.1%; FDV $1621.32M.</div></div>
+<div class="delta"><div class="who">$DRB<br>Base</div><div class="what">$291K to $287K in 24-hour pool trading; #6 trending on Base.</div><div class="verdict down">24-hour price -1.5%; FDV $18.77M.</div></div>
+<div class="delta"><div class="who">$DRV<br>Base</div><div class="what">$6.79M in 24-hour pool trading; #7 trending on Base.</div><div class="verdict up">24-hour price +29.2%; FDV $96.39M.</div></div>
+<div class="delta"><div class="who">$BNKR<br>Base</div><div class="what">$295K in 24-hour pool trading; #8 trending on Base.</div><div class="verdict down">24-hour price -8.8%; FDV $30.93M.</div></div>
+<div class="delta"><div class="who">$ZRO<br>Base</div><div class="what">$1.19M to $1.91M in 24-hour pool trading; #9 trending on Base.</div><div class="verdict up">24-hour price +6.1%; FDV $13.00M.</div></div>
+<div class="delta"><div class="who">$EDEL<br>Base</div><div class="what">$1.22M to $758K in 24-hour pool trading; #10 trending on Base.</div><div class="verdict up">24-hour price +8.4%; FDV $37.21M.</div></div>
+<div class="delta"><div class="who">$Frank<br>Solana</div><div class="what">$1.50M to $1.45M in 24-hour pool trading; #1 trending on Solana.</div><div class="verdict up">24-hour price +21.5%; FDV $829K.</div></div>
+<div class="delta"><div class="who">$TikTok<br>Solana</div><div class="what">$6.56M in 24-hour pool trading; #2 trending on Solana.</div><div class="verdict up">24-hour price +1,092.6%; FDV $467K.</div></div>
+<div class="delta"><div class="who">$PQC<br>Solana</div><div class="what">$6.05M in 24-hour pool trading; #3 trending on Solana.</div><div class="verdict up">24-hour price +1,263.9%; FDV $1.57M.</div></div>
+<div class="delta"><div class="who">$JEANPHIL<br>Solana</div><div class="what">$3.71M in 24-hour pool trading; #4 trending on Solana.</div><div class="verdict up">24-hour price +189.0%; FDV $11.62M.</div></div>
+<div class="delta"><div class="who">$WhiteWhale<br>Solana</div><div class="what">$1.57M in 24-hour pool trading; #5 trending on Solana.</div><div class="verdict up">24-hour price +144.0%; FDV $1.64M.</div></div>
+<div class="delta"><div class="who">$HeeHaw<br>Solana</div><div class="what">$5.24M in 24-hour pool trading; #6 trending on Solana.</div><div class="verdict up">24-hour price +2,230.1%; FDV $2.71M.</div></div>
+<div class="delta"><div class="who">$baton<br>Solana</div><div class="what">$2.06M in 24-hour pool trading; #7 trending on Solana.</div><div class="verdict up">24-hour price +48.6%; FDV $13.42M.</div></div>
+<div class="delta"><div class="who">$swordcat<br>Solana</div><div class="what">$2.16M in 24-hour pool trading; #8 trending on Solana.</div><div class="verdict up">24-hour price +60.5%; FDV $3.28M.</div></div>
+<div class="delta"><div class="who">$SENTS<br>Solana</div><div class="what">$1.65M in 24-hour pool trading; #9 trending on Solana.</div><div class="verdict down">24-hour price -8.7%; FDV $50K.</div></div>
+<div class="delta"><div class="who">$QI<br>Solana</div><div class="what">$3.03M in 24-hour pool trading; #10 trending on Solana.</div><div class="verdict up">24-hour price +2,873.2%; FDV $1.16M.</div></div>
+<div class="delta"><div class="who">$CLAUS<br>Ethereum</div><div class="what">$2.67M to $6.50M in 24-hour pool trading; #1 trending on Ethereum.</div><div class="verdict down">24-hour price -74.9%; FDV $8.55M.</div></div>
+<div class="delta"><div class="who">$ASENSE<br>Ethereum</div><div class="what">$3.41M in 24-hour pool trading; #2 trending on Ethereum.</div><div class="verdict down">24-hour price -74.2%; FDV $838K.</div></div>
+<div class="delta"><div class="who">$CLAUS (pool #3)<br>Ethereum</div><div class="what">$2.67M to $2.36M in 24-hour pool trading; #3 trending on Ethereum.</div><div class="verdict down">24-hour price -44.0%; FDV $9.65M.</div></div>
+<div class="delta"><div class="who">$AGL<br>Ethereum</div><div class="what">$101K to $209K in 24-hour pool trading; #4 trending on Ethereum.</div><div class="verdict down">24-hour price -1.8%; FDV $5.87M.</div></div>
+<div class="delta"><div class="who">$QNT<br>Ethereum</div><div class="what">$2.57M to $1.77M in 24-hour pool trading; #5 trending on Ethereum.</div><div class="verdict up">24-hour price +5.6%; FDV $11336.56M.</div></div>
+<div class="delta"><div class="who">$FWA<br>Ethereum</div><div class="what">$507K to $406K in 24-hour pool trading; #6 trending on Ethereum.</div><div class="verdict down">24-hour price -16.5%; FDV $14.58M.</div></div>
+<div class="delta"><div class="who">$PEPE<br>Ethereum</div><div class="what">$1.35M in 24-hour pool trading; #7 trending on Ethereum.</div><div class="verdict down">24-hour price -2.1%; FDV $1623.26M.</div></div>
+<div class="delta"><div class="who">$OGN<br>Ethereum</div><div class="what">$2.72M in 24-hour pool trading; #8 trending on Ethereum.</div><div class="verdict up">24-hour price +1.9%; FDV $52.84M.</div></div>
+<div class="delta"><div class="who">$VIBE<br>Ethereum</div><div class="what">$2.00M to $2.54M in 24-hour pool trading; #9 trending on Ethereum.</div><div class="verdict down">24-hour price -2.8%; FDV $28.98M.</div></div>
+<div class="delta"><div class="who">$ZC<br>Ethereum</div><div class="what">$1.22M to $889K in 24-hour pool trading; #10 trending on Ethereum.</div><div class="verdict down">24-hour price -3.5%; FDV $15.44M.</div></div>
+<div class="delta"><div class="who">$HOODIE<br>Robinhood Chain</div><div class="what">$955K in 24-hour pool trading; #1 trending on Robinhood Chain.</div><div class="verdict up">24-hour price +108.6%; FDV $218K.</div></div>
+<div class="delta"><div class="who">$SI<br>Robinhood Chain</div><div class="what">$96K to $34K in 24-hour pool trading; #2 trending on Robinhood Chain.</div><div class="verdict down">24-hour price -6.4%; FDV $117K.</div></div>
+<div class="delta"><div class="who">$CRH<br>Robinhood Chain</div><div class="what">$986K in 24-hour pool trading; #3 trending on Robinhood Chain.</div><div class="verdict up">24-hour price +3,672.8%; FDV $2.35M.</div></div>
+<div class="delta"><div class="who">$OVO<br>Robinhood Chain</div><div class="what">$75K in 24-hour pool trading; #4 trending on Robinhood Chain.</div><div class="verdict up">24-hour price +9.0%; FDV $61K.</div></div>
+<div class="delta"><div class="who">$CASHCAT<br>Robinhood Chain</div><div class="what">$2.29M to $2.01M in 24-hour pool trading; #5 trending on Robinhood Chain.</div><div class="verdict down">24-hour price -4.2%; FDV $113.13M.</div></div>
+<div class="delta"><div class="who">$HOOKR<br>Robinhood Chain</div><div class="what">$1.29M to $1.01M in 24-hour pool trading; #6 trending on Robinhood Chain.</div><div class="verdict up">24-hour price +3.3%; FDV $21.04M.</div></div>
+<div class="delta"><div class="who">$PONS<br>Robinhood Chain</div><div class="what">$8.12M to $3.71M in 24-hour pool trading; #7 trending on Robinhood Chain.</div><div class="verdict down">24-hour price -6.4%; FDV $240.21M.</div></div>
+<div class="delta"><div class="who">$LOL<br>Robinhood Chain</div><div class="what">$567K in 24-hour pool trading; #8 trending on Robinhood Chain.</div><div class="verdict up">24-hour price +516.0%; FDV $547K.</div></div>
+<div class="delta"><div class="who">$PULP<br>Robinhood Chain</div><div class="what">$867K in 24-hour pool trading; #9 trending on Robinhood Chain.</div><div class="verdict down">24-hour price -30.7%; FDV $772K.</div></div>
+<div class="delta"><div class="who">$AI<br>Robinhood Chain</div><div class="what">$1.95M in 24-hour pool trading; #10 trending on Robinhood Chain.</div><div class="verdict down">24-hour price -9.7%; FDV $97.64M.</div></div>
+<div class="delta"><div class="who">$SWARM<br>Robinhood Chain</div><div class="what">$11.19M in 24-hour pool trading.</div><div class="verdict up">24-hour price +6,344.7%; FDV $17.28M.</div></div>
+<div class="delta"><div class="who">$PAPER<br>Robinhood Chain</div><div class="what">$8.84M in 24-hour pool trading.</div><div class="verdict up">24-hour price +549,357.5%; FDV $13.87M.</div></div>
+<div class="delta"><div class="who">$Darkex<br>BNB Chain</div><div class="what">$43K in 24-hour pool trading; #1 trending on BNB Chain.</div><div class="verdict up">24-hour price +3.5%; FDV $1.52M.</div></div>
+<div class="delta"><div class="who">$TART<br>BNB Chain</div><div class="what">$278K to $1.02M in 24-hour pool trading; #2 trending on BNB Chain.</div><div class="verdict up">24-hour price +23.9%; FDV $8.85M.</div></div>
+<div class="delta"><div class="who">$龙虾<br>BNB Chain</div><div class="what">$5.92M to $6.90M in 24-hour pool trading; #3 trending on BNB Chain.</div><div class="verdict up">24-hour price +17.3%; FDV $44.44M.</div></div>
+<div class="delta"><div class="who">$ARK<br>BNB Chain</div><div class="what">$4.57M to $4.93M in 24-hour pool trading; #4 trending on BNB Chain.</div><div class="verdict down">24-hour price -0.6%; FDV $206.83M.</div></div>
+<div class="delta"><div class="who">$COLLECT<br>BNB Chain</div><div class="what">$2.63M to $3.83M in 24-hour pool trading; #5 trending on BNB Chain.</div><div class="verdict up">24-hour price +3.5%; FDV $64.80M.</div></div>
+<div class="delta"><div class="who">$quq<br>BNB Chain</div><div class="what">$103.79M to $107.66M in 24-hour pool trading; #6 trending on BNB Chain.</div><div class="verdict up">24-hour price +0.5%; FDV $1.28M.</div></div>
+<div class="delta"><div class="who">$CREPE<br>BNB Chain</div><div class="what">$78K in 24-hour pool trading; #7 trending on BNB Chain.</div><div class="verdict down">24-hour price -1.1%; FDV $5.72M.</div></div>
+<div class="delta"><div class="who">$WKC<br>BNB Chain</div><div class="what">$71K in 24-hour pool trading; #8 trending on BNB Chain.</div><div class="verdict down">24-hour price -4.2%; FDV $35.07M.</div></div>
+<div class="delta"><div class="who">$AEON<br>BNB Chain</div><div class="what">$4.09M in 24-hour pool trading; #9 trending on BNB Chain.</div><div class="verdict up">24-hour price +4.0%; FDV $69.35M.</div></div>
+<div class="delta"><div class="who">$Hachiko<br>BNB Chain</div><div class="what">$13K in 24-hour pool trading; #10 trending on BNB Chain.</div><div class="verdict up">24-hour price +5.9%; FDV $795K.</div></div>
+<div class="delta"><div class="who">$Q<br>BNB Chain</div><div class="what">$14.15M in 24-hour pool trading.</div><div class="verdict up">24-hour price +17.0%; FDV $139.38M.</div></div></section></main>
+<footer><p>Trench Radar reports crypto culture, launches and onchain trading. Pool prices can move fast.</p><p>Permanent report: <a href="https://reports.mykclawd.xyz/trenches/2026-10-09/">https://reports.mykclawd.xyz/trenches/2026-10-09/</a></p></footer>
+</div></body></html>

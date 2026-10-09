@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trench Radar: Month D, YYYY</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --bg-raise: #15181e;
+    --ink: #e8eaed;
+    --muted: #9aa1ab;
+    --faint: #6b7280;
+    --accent: #d29922;
+    --up: #3fb950;
+    --down: #f85149;
+    --rule: #262a31;
+    --radius: 6px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 56px 24px 72px; }
+  .one-liner {
+    margin: 0 0 38px;
+    padding: 22px 24px;
+    background: var(--bg-raise);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+  }
+  .one-liner-label { color: var(--accent); font-weight: 650; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; display: block; margin-bottom: 8px; }
+  .one-liner-text { margin: 0; font-size: 19px; line-height: 1.52; color: var(--ink); max-width: 68ch; }
+  .mast { margin-bottom: 40px; }
+  .mast .kicker { color: var(--accent); font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  h1 { margin: 0; font-size: clamp(32px, 6vw, 44px); line-height: 1.05; letter-spacing: -0.02em; font-weight: 750; max-width: 12ch; }
+  .dateline { color: var(--muted); font-size: 15px; margin-top: 12px; }
+  section { margin-top: 56px; }
+  h2 { font-size: 22px; letter-spacing: -0.01em; margin: 0 0 6px; font-weight: 700; }
+  .rule { height: 1px; background: var(--rule); border: 0; margin: 0 0 24px; }
+  .story { margin-bottom: 30px; max-width: 68ch; }
+  .story h3 { font-size: 17.5px; margin: 0 0 6px; line-height: 1.35; letter-spacing: -0.005em; }
+  .story p { margin: 0; color: var(--muted); font-size: 15.5px; max-width: 68ch; }
+  .story p strong, .story p b { color: var(--ink); font-weight: 600; }
+  .tick { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--ink); }
+  table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  thead th {
+    text-align: left; color: var(--faint); font-weight: 600; font-size: 12.5px;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 0 14px 10px 0; border-bottom: 1px solid var(--rule);
+  }
+  tbody td { padding: 14px 14px 14px 0; vertical-align: top; color: var(--muted); }
+  tbody tr + tr td { border-top: 1px solid transparent; }
+  tbody td:first-child { color: var(--ink); white-space: nowrap; }
+  .up { color: var(--up); }
+  .down { color: var(--down); }
+  .delta { display: grid; grid-template-columns: 150px 1fr; gap: 6px 20px; padding: 14px 0; }
+  .delta + .delta { border-top: 0; }
+  .delta .who { color: var(--ink); font-weight: 600; font-size: 15px; }
+  .delta .what { color: var(--muted); font-size: 15px; max-width: 68ch; }
+  .delta .verdict { grid-column: 2; font-size: 14px; }
+  .verdict.up { color: var(--up); }
+  .verdict.down { color: var(--down); }
+  .verdict.flat { color: var(--faint); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    background: var(--bg-raise);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: 8px 12px;
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  .hero { margin: 0 0 28px; }
+  .hero img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius); }
+  .story-img { margin: 0 0 12px; }
+  .story-img img { display: block; width: 100%; height: auto; max-height: 380px; object-fit: cover; border-radius: var(--radius); }
+  .story p.src { margin-top: 8px; font-size: 12.5px; line-height: 1.5; color: var(--faint); }
+  .story p.src a { color: var(--faint); text-decoration: underline; text-underline-offset: 2px; }
+  footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--rule); color: var(--faint); font-size: 13.5px; }
+  footer p { margin: 4px 0; max-width: 68ch; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  @media (max-width: 640px) {
+    .wrap { padding: 36px 18px 56px; }
+    .delta { grid-template-columns: 1fr; gap: 2px; }
+    .delta .verdict { grid-column: 1; }
+    thead { display: none; }
+    tbody td { display: block; padding: 2px 0; border: 0; }
+    tbody tr { display: block; padding: 12px 0; }
+    tbody tr + tr { border-top: 0; }
+  }
+</style>
+<!-- og:/twitter: tags are injected here by scripts/og_meta.py; do not hand-write them -->
+</head>
+<body>
+<div class="wrap">
+<!-- Hero: first element in .wrap. Omit the whole figure if hero generation failed. -->
+<figure class="hero"><img src="/trenches/images/YYYY-MM-DD-HHMMSS.jpg" alt="Short plain description, no dates"></figure>
+<section class="one-liner"><span class="one-liner-label">One-liner</span><p class="one-liner-text">The single takeaway: two or three stories in one sentence.</p></section>
+<header class="mast"><div class="kicker">Trench Radar</div><h1>The day's single biggest story</h1><div class="dateline"><b>Month D, YYYY</b> · 8:00 AM ET</div></header>
+
+<main><section><h2>Headline stories</h2><hr class="rule">
+<article class="story"><h3>One-sentence headline ending in a period.</h3><p>Plain-English reporting with the <strong>key number</strong> in bold. What happened, when, who, and what it means. No jargon, no justification for why it is here.</p><p class="src">Sources: <a href="https://example.com/article">example.com</a>, <a href="https://x.com/account/status/1">x.com</a></p></article>
+</section>
+<section><h2>Culture and drama</h2><hr class="rule">
+<!-- Optional story image: directly before the h3, max 3 per report. -->
+<article class="story"><figure class="story-img"><img src="/trenches/YYYY-MM-DD/img/slug.jpg" alt="Short plain description, no dates" loading="lazy"></figure><h3>Story headline.</h3><p>Story body.</p><p class="src">Sources: <a href="https://example.com/article">example.com</a></p></article>
+</section>
+<section><h2>Builders and launches</h2><hr class="rule">
+<article class="story"><h3>Story headline.</h3><p>Story body.</p><p class="src">Sources: <a href="https://example.com/article">example.com</a></p></article>
+</section>
+<section><h2>Coins worth noting</h2><hr class="rule"><article class="story"><p>Rolling 24-hour pool figures near 8 AM ET. FDV means fully diluted value, not circulating market cap.</p></article><table><thead><tr><th>Token</th><th>Chain</th><th>24h volume</th><th>FDV</th><th>24h</th></tr></thead><tbody><tr><td><a href="https://www.geckoterminal.com/base/pools/0xPOOL">$TICKER</a></td><td>Base</td><td>$2.90M</td><td>$34.25M</td><td>-31.1%</td></tr></tbody></table></section>
+<section><h2>Seed accounts active</h2><hr class="rule"><div class="chips"><span class="chip">handle: what they said or did</span></div></section>
+<section><h2>Deltas since last run</h2><hr class="rule"><div class="delta"><div class="who">$TICKER<br>Base</div><div class="what">$7.07M to $165.77M in 24-hour pool trading; #3 trending on Base.</div><div class="verdict up">24-hour price +19.7%; FDV $229.97M.</div></div>
+<!-- verdict classes: up (green), down (red), flat (grey) -->
+</section></main>
+<footer><p>Trench Radar reports crypto culture, launches and onchain trading. Pool prices can move fast.</p><p>Permanent report: <a href="https://reports.example.com/trenches/YYYY-MM-DD/">https://reports.example.com/trenches/YYYY-MM-DD/</a></p></footer>
+</div></body></html>
